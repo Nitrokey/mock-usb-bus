@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: Robin Krahl <robin.krahl@ireas.org>
+# SPDX-License-Identifier: CC0-1.0
+
+[package]
+name = "mock-usb-bus"
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0 OR MIT"
+description = "A mock USB bus implementation"
+repository = "https://github.com/Nitrokey/mock-usb-bus"
+authors = ["Robin Krahl <robin.krahl@ireas.org>"]
+
+[dependencies]
+crossbeam = "0.8.4"
+
+usb-device02 = { package = "usb-device", version = "0.2.9", optional = true }
+usb-device03 = { package = "usb-device", version = "0.3.2", optional = true }
+
+[features]
+"usb-device-v0.2" = ["dep:usb-device02"]
+"usb-device-v0.3" = ["dep:usb-device03"]
+
+[[test]]
+name = "ping"
+required-features = ["usb-device-v0.2"]
+
+[package.metadata.docs.rs]
+all-features = true

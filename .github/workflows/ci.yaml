@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: Robin Krahl <robin.krahl@ireas.org>
+# SPDX-License-Identifier: CC0-1.0
+
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+    - name: Install rust
+      run: rustup show
+    - name: Install reuse
+      run: pipx install reuse
+    - name: Execute checks
+      run: make ci
